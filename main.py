@@ -3,33 +3,81 @@ import os
 import sys
 import asyncio
 import pdb
+import time
 
 class date(object):
-    time = ''
+    minute = 0
+    hour = 0
+    day = 0
+    mounth = 0
+    year = 0
         
-    def __init__(self, curTime):
-	    self.time = curTime
+    def __init__(self):
+        dt = datetime.datetime.now()
+        self.minute = dt.minute
+        self.hour = dt.hour
+        self.day = dt.day
+        self.month = dt.month
+        self.year = dt.year
 
     def retTime(self):
-	    return self.time
+        return '{}.{}.{}: {}:{}'.format(self.day,
+                                           self.month,
+                                           self.year,
+                                           self.hour,
+                                           self.minute)
 
-    def setTime(self, curTime):
-        self.time = curTime
+    def changeTime(self):
+        self.minute += 1
+
+        if self.minute == 60:
+            self.hour += 1
+            self.minute = 0
+
+        if self.hour == 24:
+            self.day += 1
+            self.hour = 0
         
+        if self.day == 28:
+            if self.month == 2 and self.year % 4 != 0:
+                self.month += 1
+                self.day = 1
+
+        if self.day == 29:
+            if self.month == 2 and self.year % 4 == 0:
+                self.month += 1
+                self.day = 1
+
+        if self.day == 31:
+            if self.month % 2 == 0 and self.month <= 7:
+                self.month += 1
+                self.day = 1
+
+            elif self.month % 2 != 0 and self.month >= 7:
+                self.month += 1
+                self.day = 1
+
+        if self.day == 32:
+            if self.month % 2 != 0 and self.month <= 7:
+                self.month += 1
+                self.day = 1
+
+            elif self.month % 2 == 0 and self.month >= 7:
+                self.month += 1
+                self.day = 1
+
+        if self.month == 13:
+            year += 1
+            month = 1
 
 def showMainInf(message):
-    try:
-        print('aws')
-        result = os.system('clear')
+    result = os.system('clear')
     
-        if result == 1:
-            os.system('cls')
+    if result == 1:
+        os.system('cls')
 
-        print(dat.retTime())
-        print(message)
-
-    except:
-        print('show error')
+    print(dat.retTime())
+    print(message)
 
 async def mainLoop():
 
@@ -49,9 +97,7 @@ async def mainLoop():
             sys.stdout = les
 
             curOut = open('temp.txt', 'r')
-
             showMainInf(message = curOut.read())
-
             curOut.close()
 
         except Exception as e:
@@ -60,7 +106,8 @@ async def mainLoop():
             showMainInf(message = e)
 
 async def timer():
-    dat.setTime(curTime = datetime.datetime.now())
+    time.sleep(1)
+    dat.changeTime()                            
 
 async def start():
     while True:
@@ -72,7 +119,8 @@ async def start():
 
 nowTime = datetime.datetime.now()
 les = sys.stdout
-dat = date(curTime = datetime.datetime.now())
+dat = date()
+
 showMainInf(message = '')
 
 asyncio.run(start())

@@ -1,4 +1,5 @@
 import datetime
+import time
 
 class Date(object):
     minute = 0
@@ -65,5 +66,10 @@ class Date(object):
         if self.month == 13:
             year += 1
             month = 1
+
+def timer():
+    while True:
+        time.sleep(1)
+        dat.changeTime()
 
 dat = Date()

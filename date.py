@@ -24,8 +24,8 @@ class Date(object):
                                         self.hour,
                                         self.minute)
 
-    def changeTime(self):
-        self.minute += 1
+    def changeTime(self, step, digit):
+        exec('self.{} += {}'.format(digit, step))
 
         if self.minute == 60:
             self.hour += 1
@@ -70,6 +70,6 @@ class Date(object):
 def timer():
     while True:
         time.sleep(1)
-        dat.changeTime()
+        dat.changeTime(step = 1, digit = 'minute')
 
 dat = Date()

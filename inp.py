@@ -39,4 +39,3 @@ def mainLoop():
                 showMainInf(message = e)
 
 les = sys.stdout
-

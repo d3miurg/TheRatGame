@@ -1,6 +1,8 @@
 import datetime
 import time
 
+from mankind import humans
+
 class Date(object):
     minute = 0
     hour = 0
@@ -70,6 +72,10 @@ class Date(object):
 def timer():
     while True:
         time.sleep(1)
+        
         dat.changeTime(step = 1, digit = 'minute')
+
+        for i in humans:
+            i.lifeCycle()
 
 dat = Date()

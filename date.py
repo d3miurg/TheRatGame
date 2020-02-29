@@ -2,6 +2,7 @@ import datetime
 import time
 
 from mankind import humans
+from mankind import Human
 
 class Date(object):
     minute = 0
@@ -70,10 +71,16 @@ class Date(object):
             month = 1
 
 def timer():
+    n = 0
+
     while True:
-        time.sleep(1)
+        time.sleep((510100000 - n//50000)/510100000)
         
         dat.changeTime(step = 1, digit = 'minute')
+
+        if n != 510100000:
+            asd = Human()
+            n += 1
 
         for i in humans:
             i.lifeCycle()

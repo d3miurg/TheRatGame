@@ -4,6 +4,7 @@ import sys
 from date import dat
 from mankind import Human
 from mankind import humans
+from threading import Thread
 
 def showMainInf(message):
     result = os.system('clear')
@@ -41,3 +42,5 @@ def mainLoop():
                 showMainInf(message = e)
 
 les = sys.stdout
+
+print(humans)

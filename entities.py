@@ -1,17 +1,45 @@
 homes = []
 
 class Home(object):
-	building = []
+    building = []
+    allx = 0
+    ally = 0
+    street = False
 
-	def __init__(self, constructions):
-		self.building = constructions
+    def __init__(self, constructions):
+        self.building = constructions
+        self.posCount()
+        
         homes.append(self)
 
-	def __repr__(self):
-		return str(self.building)
+    def __repr__(self):
+        if self.street:
+            return "Street"
 
-	def expand(newConstructions):
-		self.building.append(newConstructions)
+        else:
+            return "Home at ({}, {})".format(self.allx, self.ally)
+
+    def expand(newConstructions):
+        self.building.append(newConstructions)
+
+        self.allx = 0
+        self.ally = 0
+        self.posCount()
+
+    def posCount(self):
+        try:
+            for i in self.building:
+                self.allx += i.posX
+                self.ally += i.posY
+
+            self.allx /= len(self.building)
+            self.ally /= len(self.building)
+
+        except:
+            self.street = True
+
+            self.allx = 0
+            self.ally = 0
 
 class Wall(object):
 	angle = 0

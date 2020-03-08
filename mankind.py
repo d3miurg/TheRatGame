@@ -1,10 +1,14 @@
 import random
+from entities import noHome
 
 humans = []
 
 class Human(object):
     hunger = 0
     gender = False
+    name = ''
+    lifetime = 0
+    home = noHome
 
     def __init__(self):
         self.gender = genders.get(random.randint(1, 2))
@@ -26,12 +30,11 @@ class Human(object):
         self.hunger += 1
         self.lifetime += 1
 
+    def setHome(self, newHome):
+        self.home = newHome
+
 namesMen = {1: 'Adam', 2: 'Malahiya', 3: 'Aron', 4: 'Gennadiy', 5: 'Ilya'}
 
-namesWomen = {1: 'Polikseniya', 
-              2: 'Magdalina', 
-              3: 'Vladimira', 
-              4: 'Lyubov', 
-              5: 'Tamara'}
+namesWomen = {1: 'Polikseniya', 2: 'Magdalina', 3: 'Vladimira', 4: 'Lyubov', 5: 'Tamara'}
 
 genders = {1: True, 2: False}

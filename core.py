@@ -4,6 +4,9 @@ import sys
 from date import dat
 from mankind import Human
 from mankind import humans
+from entities import Home
+from entities import homes
+from entities import Wall
 from threading import Thread
 
 def showMainInf(message):
@@ -42,5 +45,3 @@ def mainLoop():
                 showMainInf(message = e)
 
 les = sys.stdout
-
-print(humans)
